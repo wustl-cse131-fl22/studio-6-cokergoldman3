@@ -59,14 +59,26 @@ public class RecursiveMethods {
 		
 	}
 	
+	/**
+	 * This method is the helper method.
+	 * 
+	 * @param array the array to create a reverse of, not to be mutated
+	 * @param the index of the array
+	 * @return the modified array
+	 */
+	
 	public static int[] helper(int[] array, int index){
+		int[] array1 = new int[array.length];
+		for(int i = 0; i < array.length; i++)
+		{
+			array1[i] = array[i];
+		}
 		if(index == array.length/2) 
 		{
-			return array;
+			return array1;
 		}
 		else
 		{
-			int[] array1 = array;
 			array1[array.length - 1 - index] = array[index];
 			array1[index] = array[array.length - 1 - index];
 			return helper(array1, index+1);
@@ -85,7 +97,18 @@ public class RecursiveMethods {
 	public static void circlesUponCircles(double xCenter, double yCenter, double radius,
 			double radiusMinimumDrawingThreshold) {
 		
-		// FIXME
+		if(radius <= radiusMinimumDrawingThreshold)
+		{
+			return;
+		}
+		else
+		{
+			StdDraw.circle(xCenter, yCenter, radius);
+			circlesUponCircles(xCenter + radius, yCenter, radius/3.0, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter - radius, yCenter, radius/3.0, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter, yCenter + radius, radius/3.0, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter, yCenter - radius, radius/3.0, radiusMinimumDrawingThreshold);
+		}
 	}
 
 }
